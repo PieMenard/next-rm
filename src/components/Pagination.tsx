@@ -17,8 +17,8 @@ const Pagination = ({ page, totalPages, setPage }: PaginationProps) => {
       >
         <ArrowLeftIcon />
       </Button>
-      <p className="bg-black text-white w-10 rounded-lg flex items-center justify-center">
-        {page}
+      <p className="bg-black text-white px-2 rounded-lg flex items-center justify-center">
+        page {page} of {totalPages}
       </p>
       <Button
         size="icon"
