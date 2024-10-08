@@ -12,7 +12,7 @@ import Image from 'next/image';
 const CharacterCard = ({ character }: { character: Character }) => {
   return (
     <Card className="w-[350px] h-[380px] bg-zinc-100">
-      <CardHeader className="border-2 uppercase">
+      <CardHeader className="border-b-2 uppercase">
         <CardTitle>
           {character.id}. {character.name}
         </CardTitle>
