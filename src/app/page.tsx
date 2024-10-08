@@ -77,7 +77,7 @@ export default function Home() {
         <p>Loading...</p>
       ) : (
         <div>
-          {characters.length === 0 ? (
+          {characters.length === 0 && newSearch ? (
             <p>No results</p>
           ) : (
             <ul className="flex flex-wrap gap-4">
@@ -88,9 +88,9 @@ export default function Home() {
               ))}
             </ul>
           )}
+          <Pagination page={page} setPage={setPage} totalPages={totalPages} />
         </div>
       )}
-      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </main>
   );
 }
