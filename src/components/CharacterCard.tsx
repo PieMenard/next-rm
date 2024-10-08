@@ -31,7 +31,7 @@ const CharacterCard = ({ character }: { character: Character }) => {
         <p>Episodes</p>
         <select>
           {character.episode.map((episode: string) => (
-            <option>{episode}</option>
+            <option key={episode}>{episode}</option>
           ))}
         </select>
       </CardFooter>
