@@ -6,6 +6,7 @@ import SearchBox from '@/components/SearchBox';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Character } from '@/types/types';
+import { LoaderPinwheelIcon } from 'lucide-react';
 import { FormEvent, useEffect, useState } from 'react';
 
 export default function Home() {
@@ -14,8 +15,10 @@ export default function Home() {
   const [totalPages, SetTotalPages] = useState(0);
   const [query, setQuery] = useState('');
   const [newSearch, setNewSearch] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const fetchCharacters = async () => {
+    setLoading(true);
     try {
       const res = await fetch(
         `https://rickandmortyapi.com/api/character?page=${page}&name=${newSearch}`
@@ -45,6 +48,8 @@ export default function Home() {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,19 +73,23 @@ export default function Home() {
         setQuery={setQuery}
         handleSearch={handleSearch}
       />
-      <div>
-        {characters.length === 0 ? (
-          <p>No results</p>
-        ) : (
-          <ul className="flex flex-wrap gap-4">
-            {characters.map((character) => (
-              <li key={character.id}>
-                <CharacterCard character={character} />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div>
+          {characters.length === 0 ? (
+            <p>No results</p>
+          ) : (
+            <ul className="flex flex-wrap gap-4">
+              {characters.map((character) => (
+                <li key={character.id}>
+                  <CharacterCard character={character} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </main>
   );
