@@ -28,11 +28,13 @@ export default function Home() {
         SetTotalPages(data.info.pages);
 
         const fetchDetails = data.results.map(async (character: any) => {
-          const fetchEpisodes = character.episode.map(async (episode: any) => {
-            const episodeResponse = await fetch(episode);
-            const episodeData = await episodeResponse.json();
-            return episodeData.name;
-          });
+          const fetchEpisodes = character.episode.map(
+            async (episodeUrl: string) => {
+              const episodeResponse = await fetch(episodeUrl);
+              const episodeData = await episodeResponse.json();
+              return episodeData.name;
+            }
+          );
           const episode_names = await Promise.all(fetchEpisodes);
           return {
             id: character.id,
