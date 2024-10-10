@@ -12,7 +12,7 @@ import { FormEvent, useEffect, useState } from 'react';
 
 export default function Home() {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [totalPages, SetTotalPages] = useState(0);
   const [query, setQuery] = useState('');
   const [newSearch, setNewSearch] = useState('');
@@ -59,10 +59,12 @@ export default function Home() {
   const fetchCharactersMyApi = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`/api/characters`);
+      const res = await fetch(`/api/characters?limit=10&offset=${page * 10}`);
       const data = await res.json();
       if (data.success) {
-        setCharacters(data.data);
+        setCharacters(data.results.data);
+        console.log(data.results.total);
+        SetTotalPages(Math.ceil(data.results.total / 10));
       } else {
         setCharacters([]);
       }

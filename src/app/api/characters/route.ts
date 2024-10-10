@@ -66,7 +66,12 @@ export async function GET(req: NextRequest) {
         episodes: true,
       },
     });
-    return NextResponse.json({ success: true, data: characters });
+    const total = await prisma.character.count()
+    const results = {
+      data: characters,
+      total: total
+    }
+    return NextResponse.json({ success: true, results: results });
   } catch (error) {
     return NextResponse.json({ success: false, error: error });
   }
