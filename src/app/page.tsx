@@ -106,7 +106,10 @@ export default function Home() {
             <ul className="flex flex-wrap gap-4">
               {characters.map((character) => (
                 <li key={character.id}>
-                  <CharacterCard character={character} />
+                  <CharacterCard
+                    character={character}
+                    refetchCharacters={fetchCharactersMyApi}
+                  />
                 </li>
               ))}
             </ul>

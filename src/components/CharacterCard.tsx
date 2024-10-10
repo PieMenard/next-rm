@@ -2,23 +2,32 @@ import { Character, Episode } from '@/types/types';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from './ui/card';
 import Image from 'next/image';
-import { Button } from './ui/button';
-import { Trash2Icon, TrashIcon } from 'lucide-react';
+
 import DeleteCharacter from './DeleteCharacter';
 
-const CharacterCard = ({ character }: { character: Character }) => {
+type CharacterCardProps = {
+  character: Character;
+  refetchCharacters: () => void;
+};
+
+const CharacterCard = ({
+  character,
+  refetchCharacters,
+}: CharacterCardProps) => {
   return (
     <Card className="relative w-[350px] h-[400px] bg-zinc-100">
       <CardHeader className="border-b-2 uppercase">
         <CardTitle className="flex gap-3 justify-between items-center">
           {character.id}. {character.name}
-          <DeleteCharacter id={character.id} />
+          <DeleteCharacter
+            id={character.id}
+            refetchCharacters={refetchCharacters}
+          />
         </CardTitle>
       </CardHeader>
       <CardContent className="mt-4">
