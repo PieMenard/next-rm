@@ -1,6 +1,7 @@
 'use client';
 
 import CharacterCard from '@/components/CharacterCard';
+import CreateCharacter from '@/components/CreateCharacter';
 import Pagination from '@/components/Pagination';
 import SearchBox from '@/components/SearchBox';
 import { Button } from '@/components/ui/button';
@@ -92,6 +93,7 @@ export default function Home() {
         setQuery={setQuery}
         handleSearch={handleSearch}
       />
+      <CreateCharacter />
       {loading ? (
         <p>Loading...</p>
       ) : (

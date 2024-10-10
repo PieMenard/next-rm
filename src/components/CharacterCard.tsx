@@ -8,13 +8,17 @@ import {
   CardTitle,
 } from './ui/card';
 import Image from 'next/image';
+import { Button } from './ui/button';
+import { Trash2Icon, TrashIcon } from 'lucide-react';
+import DeleteCharacter from './DeleteCharacter';
 
 const CharacterCard = ({ character }: { character: Character }) => {
   return (
-    <Card className="w-[350px] h-[380px] bg-zinc-100">
+    <Card className="relative w-[350px] h-[400px] bg-zinc-100">
       <CardHeader className="border-b-2 uppercase">
-        <CardTitle>
+        <CardTitle className="flex gap-3 justify-between items-center">
           {character.id}. {character.name}
+          <DeleteCharacter id={character.id} />
         </CardTitle>
       </CardHeader>
       <CardContent className="mt-4">
