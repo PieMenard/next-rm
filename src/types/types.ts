@@ -2,7 +2,7 @@ export type Character = {
   name: string;
   id: number;
   image: string;
-  episode: [];
+  episodes: [];
 };
 
 export type Episode = {

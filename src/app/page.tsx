@@ -17,7 +17,7 @@ export default function Home() {
   const [newSearch, setNewSearch] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchCharacters = async () => {
+  const fetchCharactersPublicApi = async () => {
     setLoading(true);
     try {
       const res = await fetch(
@@ -55,8 +55,25 @@ export default function Home() {
     }
   };
 
+  const fetchCharactersMyApi = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/characters`);
+      const data = await res.json();
+      if (data.success) {
+        setCharacters(data.data);
+      } else {
+        setCharacters([]);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    fetchCharacters();
+    fetchCharactersMyApi();
   }, [page, newSearch]);
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {

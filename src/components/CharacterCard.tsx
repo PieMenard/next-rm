@@ -30,8 +30,10 @@ const CharacterCard = ({ character }: { character: Character }) => {
       <CardFooter className="flex flex-col">
         <p>Episodes</p>
         <select>
-          {character.episode.map((episode: string) => (
-            <option key={episode}>{episode}</option>
+          {/* {character.episode.map((episode: string) => (
+            <option key={episode}>{episode}</option> */}
+          {character.episodes.map((episode: Episode) => (
+            <option key={episode.id}>{episode.name}</option>
           ))}
         </select>
       </CardFooter>
